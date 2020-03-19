@@ -15,3 +15,5 @@ It contains following circuits:
   -xnor
   -greater than comparision
   -equal to comparision
+
+alu8.v is main module
