@@ -6,7 +6,7 @@ main8_tb.v is test bench of processor,you can change the clock and reset line ac
 main8 is the executive file i compiled
 
 for every submodule of this processor there is a file prefixed with "_tb.v" which is a test bench to check that particular module
-The complete features and functions of this processor are listed in scheme.txt and
+The complete features and functions of this processor are listed in scheme.txt and 8 Bit Harvard Processor.ppt
 How to check the output?
   -> You can check the scheme.txt and make your own instruction set
   -> Paste them in file named "test.prog" and make all other values to zeroes as shown in the example I have done
