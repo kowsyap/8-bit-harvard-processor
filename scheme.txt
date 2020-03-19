@@ -1,0 +1,78 @@
+
+processor control unit
+
+instr	reg		alu		memto	reg		mem		mem		reg		opcode	aluop
+		dst		src		reg		write	read	write	print
+
+alu		1		0		0		1		0		0		0		01xxxx	01
+mvi		0		1		0		1		0		0		0		100000	10
+mov		0		0		0		1		0		0		0		100001	10
+load	0		0		1		1		1		0		0		100010	10
+store	0		0		0		0		0		1		0		100011	10
+hlt		1		0		0		1		0		0		1		111111	11
+
+instruction set codes
+
+opcode	 instruction		application
+
+100000 - mvi	a,9			(a=9)
+100001 - mov	a,b 		(a=b)
+100010 - load 	a,mem_addr  (a=[mem_addr])
+100011 - store 	mem_addr,a  ([mem_addr]=a)
+01xxxx - alu
+  0000 - add	 c,a,b 	 	(c=a+b)
+  0001 - sub	 c,a,b	 	(c=a-b)
+  0010 - mul	 c,d,a,b 	(c,d=a*b)
+  0011 - div	 c,d,a,b 	(q=a/b,r=a%b)
+  0100 - shl	 c,a,b	 	(c=a<<b)
+  0101 - shr	 c,a,b	 	(c=a>>b)
+  0110 - rol	 c,a	 	(c={a[6:0],a[7]})
+  0111 - not	 c,a	 	(c=~a)
+  1000 - and 	 c,a,b	 	(c=a&b)
+  1001 - or  	 c,a,b	 	(c=a|b)
+  1010 - nand 	 c,a,b	 	(c=~(a&b))
+  1011 - nor  	 c,a,b	 	(c=~(a|b))
+  1100 - xor  	 c,a,b	 	(c=a^b)
+  1101 - xnor    c,a,b	 	(c=~(a^b))
+  1110 - greater c,a,b	 	(c=(a>b)? 1:0)
+  1111 - equal   c,a,b 	 	(c=(a=b)? 1:0)
+111111 - hlt				(STOPS EVERYTHING AND PRINTS FINAL REGISTER AND MEMORY VALUES)
+  
+  addition of 8 fixed point number a+b+c+d+e+f+g+h
+  
+  assembly code
+  
+  load a,[61] 
+  load b,[62]
+  add a,a,b 		//a+b
+  load b,[63]
+  add a,a,b 		//a+b+c
+  load b,[64]
+  add a,a,b			//a+b+c+d
+  load b,[65]
+  add a,a,b 		//a+b+c+d+e
+  load b,[66]
+  add a,a,b 		//a+b+c+d+e+f
+  load b,[67]
+  add a,a,b 		//a+b+c+d+e+f+g
+  load b,[68]
+  add a,a,b 		//a+b+c+d+e+f+g+h
+  hlt
+  
+  above instructions in 32 bit binary numbers
+  
+  1000_1000_0010_0000_0000_0000_0011_1101
+  1000_1000_0100_0000_0000_0000_0011_1110
+  0100_0000_0010_0000_0000_0000_0010_0010
+  1000_1000_0100_0000_0000_0000_0011_1111
+  0100_0000_0010_0000_0000_0000_0010_0010
+  1000_1000_0100_0000_0000_0000_0100_0000
+  0100_0000_0010_0000_0000_0000_0010_0010
+  1000_1000_0100_0000_0000_0000_0100_0001
+  0100_0000_0010_0000_0000_0000_0010_0010
+  1000_1000_0100_0000_0000_0000_0100_0010
+  0100_0000_0010_0000_0000_0000_0010_0010
+  1000_1000_0100_0000_0000_0000_0100_0011
+  0100_0000_0010_0000_0000_0000_0010_0010
+  1000_1000_0100_0000_0000_0000_0100_0100
+  0100_0000_0010_0000_0000_0000_0010_0010
